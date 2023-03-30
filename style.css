@@ -14,6 +14,13 @@
   margin: 45px 200px 40px;
 }
 
+@media screen and (max-width: 1040px) {
+  .header {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .logo {
   color: #fff;
 }
@@ -25,6 +32,7 @@
 
 .line__place_header {
   width: 100%;
+  margin-top: 37px;
 }
 
 .profile {
@@ -34,9 +42,25 @@
   align-items: center;
 }
 
-.profile__info {
-  margin-left: 30px;
+@media screen and (max-width: 1040px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+}
 
+.profile__info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__info {
+    align-items: center;
+    margin: 0;
+  }
 }
 
 .profile__title {
@@ -67,9 +91,13 @@
   height: 24px;
   margin-left: 15px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .profile__add-button {
+  background-image: url(/images/Vector\ \(1\).svg);
+  background-repeat: no-repeat;
+  background-position: center;
   margin: 0;
   width: 150px;
   height: 50px;
@@ -79,14 +107,38 @@
   color: #fff;
   background-color: #000;
   border-color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile__add-button {
+    width: 282px;
+    margin: 0;
+    align-self: center;
+  }
 }
 
 .elements {
   display: grid;
-  grid-template-columns: repeat(3, 281px);
-  grid-template-rows: 360px;
+  grid-template-columns: repeat(3, 282px);
+  grid-auto-rows: 361px;
   gap: 20px 17px;
-  margin: 100px 200px 66px;
+  margin: 50px 200px 66px;
+}
+
+@media screen and (max-width: 1279px) {
+  .elements {
+  grid-template-columns: repeat(2, 282px);
+  justify-content: center;
+  margin-left: 0;
+  margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .elements {
+  grid-template-columns: repeat(1, 282px);
+  }
 }
 
 .elements__item {
@@ -133,14 +185,29 @@
   margin-left: auto;
   margin-top: 5px;
   background-color: #fff;
+  cursor: pointer;
+}
+
+.elements__button:hover {
+  background-image: url(/images/Vector.svg);
+}
+
+.elements__button:active {
+  background-image: url(/images/Union.svg);
 }
 
 .footer {
   margin: 66px 200px 60px;
 }
+@media screen and (max-width: 1040px) {
+  .footer {
+    margin-left: 0;
+    margin-right: 0;
+}
+}
 
 .popup {
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -157,6 +224,14 @@
   width: 430px;
   height: 330px;
   border-radius: 10px;
+  position: relative;
+}
+
+@media screen and (max-width: 520px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+  }
 }
 
 .line__place_popup {
@@ -193,4 +268,41 @@
   color: #fff;
   margin-left: 34px;
   font-size: 18px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .popup__save-button {
+    width: 238px;
+    height: 46px;
+  }
+}
+
+.popup__close {
+  color: white;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background-image: url(/images/Close\ Icon.svg);
+  background-color: rgba(0,0,0,0);
+  background-size: 32px 32px;
+  border: none;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 520px) {
+  .popup__close {
+      margin: 0 0 16px calc(100% - 68px);
+      width: 20px;
+      height: 20px;
+      background-size: 20px 20px;
+      top: -36px;
+      right: 0;
+  }
 }
