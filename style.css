@@ -283,6 +283,10 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
+.popup__opened {
+  display: flex;
+}
+
 .popup__container {
   background-color: #fff;
   width: 430px;
@@ -322,6 +326,7 @@
   margin-top: 30px;
   margin-left: 34px;
   border: none;
+  width: 358px;
 }
 
 .popup__save-button {
