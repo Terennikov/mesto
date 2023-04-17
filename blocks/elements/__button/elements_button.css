@@ -2,7 +2,7 @@
     width: 22px;
     height: 19px;
     border: none;
-    background-image: url(/images/Group.png);
+    background-image: url(../../../images/Group.png);
     margin-right: 0px;
     margin-left: auto;
     margin-top: 5px;
@@ -11,9 +11,9 @@
   }
   
   .elements__button:hover {
-    background-image: url(/images/Vector.svg);
+    background-image: url(../../../images/Vector.svg);
   }
   
   .elements__button:active {
-    background-image: url(/images/Union.svg);
+    background-image: url(../../../images/Union.svg);
   }
