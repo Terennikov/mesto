@@ -1,0 +1,17 @@
+.header {
+    margin: 45px 200px 40px;
+  }
+  
+  @media screen and (max-width: 1040px) {
+    .header {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .header {
+      margin-top: 28px;
+    }
+  }
+  
