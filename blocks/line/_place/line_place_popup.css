@@ -1,17 +1,17 @@
-.line__place_popup {
+.line_place_popup {
     width: 358px;
     margin-left: 34px;
   }
 
   @media screen and (max-width: 1040px) {
-    .line__place_popup {
+    .line_place_popup {
       max-width: 90%;
       margin-left: 22px;
     }
   }
   
   @media screen and (max-width: 520px) {
-    .line__place_popup {
+    .line_place_popup {
       max-width: 238px;
     }
   }
