@@ -28,4 +28,3 @@ popupForm.addEventListener('submit', (event) => {
   profileSubtitle.textContent = detailInput.value;
   closePopup();
 })
-
