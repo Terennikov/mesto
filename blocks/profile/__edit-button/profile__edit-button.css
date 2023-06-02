@@ -3,13 +3,12 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: #000;
-    border-color: #fff;
+    border: solid #fff 2px;
     width: 24px;
     height: 24px;
     margin-left: 15px;
     margin-bottom: 28px;
     cursor: pointer;
-    border: 1px;
   }
   
   @media screen and (max-width: 1055px) {

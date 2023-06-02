@@ -10,7 +10,8 @@
     cursor: pointer;
   }
 
-  .elements__button:hover{
+  .elements__button:hover {
     background-image: url(../../../images/Vector.svg);
     opacity: 0.5;
   }
+

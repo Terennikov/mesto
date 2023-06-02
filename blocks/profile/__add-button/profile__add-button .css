@@ -10,9 +10,8 @@
     font-size: 22px;
     color: #fff;
     background-color: #000;
-    border-color: #fff;
     cursor: pointer;
-    border: 2px;
+    border: solid #fff 2px;
   }
   
   .profile__add-button:hover {
