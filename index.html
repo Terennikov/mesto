@@ -9,11 +9,11 @@
 <body class="body">
   <div class="page">
     <header class="header">
-        <img src="./images/logo.svg" class="header__logo" alt="Лого">
-        <div class="line line_place_header">
+        <div class="header__overlay">
+          <img src="./images/logo.svg" class="header__logo" alt="Лого">
         </div>
     </header>
-    <div class="main">
+    <main class="main">
     <section class="profile">
       <img src="./images/Avatar.png" alt="Портрет Жака Ива" class="profile__avatar">
       <div class="profile__info">
@@ -85,7 +85,7 @@
         </div>
       </div>
     </section>
-  </div>
+  </main>
     <footer class="footer">
       <img class="footer__logo" src="./images/Footer.png" alt="Место копирайт">
     </footer>
@@ -98,11 +98,7 @@
       </button>
       <form name="form" action="#" class="popup__form">
         <input type="text" name="name" value="Жак-Ив Кусто" class="popup__input popup__input_type_name">
-        <div class="line line_place_popup">
-        </div>
         <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details">
-        <div class="line line_place_popup">
-        </div>
         <input type="submit" name="save-button" value="Сохранить" class="popup__save-button">
       </form>
     </div>
