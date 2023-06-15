@@ -1,4 +1,4 @@
-.elements__button {
+.elements__like-button {
     width: 22px;
     height: 19px;
     border: none;
@@ -10,7 +10,7 @@
     cursor: pointer;
   }
 
-  .elements__button:hover {
+  .elements__like-button:hover {
     background-image: url(../../../images/Vector.svg);
     opacity: 0.5;
   }

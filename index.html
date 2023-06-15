@@ -23,67 +23,14 @@
       <button type="button" class="profile__add-button">
       </button>
     </section>
-    <section class="elements">
-      <div class="elements__item">
-        <img src="./images/Mask_Group2.png" alt="Вид на горы и леса Карачаевска" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-            Карачаевск
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Вид на гору Эльбрус" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-            Гора Эльбрус
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img src="./images/Mask_Group3.png" alt="Заброшенный монастырь в горах Домбая" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-            Домбай
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img src="./images/thimo-van-leeuwen-6HW-f_SktLg-unsplash.jpg" alt="Небольшой водопад на Плитвицких озерах" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-            Плитвицкие озера
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img src="./images/evgeny-matveev-ArEzsjLgG-I-unsplash.jpg" alt="Узкая старая улица Анталии" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-            Анталия
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img src="./images/akhmed-chalandarov-ZZtBgtEM3W4-unsplash.jpg" alt="Бурная горная река в поселке Гонода" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place">
-          Гонода
-          </h2>
-          <button type="button" name="like" class="elements__button"></button>
-        </div>
-      </div>
+    <section id="elements-table" class="elements">
+
     </section>
   </main>
     <footer class="footer">
       <img class="footer__logo" src="./images/Footer.png" alt="Место копирайт">
     </footer>
-    <section class="popup">
+    <section class="popup popup_type_edit">
       <div class="popup__container">
       <h3 class="popup__title">
         Редактировать профиль
@@ -95,8 +42,30 @@
         <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details">
         <input type="submit" name="save-button" value="Сохранить" class="popup__save-button">
       </form>
+      </div>
+    </section>
+    <section class="popup popup_type_add">
+    <div class="popup__container" >
+      <h3 class="popup__title">
+        Новое место
+      </h3>
+      <button type="button" name="close" class="popup__close">
+      </button>
+      <form name="form" action="#" class="popup__form2">
+        <input type="text" name="place" value="Название" class="popup__input popup__input_type_place">
+        <input type="text" name="link" value="Ссылка на картинку" class="popup__input popup__input_type_link">
+        <input type="submit" name="create-button" value="Создать" class="popup__create-button">
+      </form>
     </div>
     </section>
+      <template class="elements__item" id="item">
+        <img src="" alt="" class="elements__photo">
+        <div class="elements__container">
+          <h2 class="elements__place"></h2>
+          <button type="button" name="like" class="elements__like-button"></button>
+          <button type="button" name="delete" class="elements__delete-button"></button>
+        </div>
+      </template>
   </div>
   <script src="./scripts/index.js"></script>
 </body>
