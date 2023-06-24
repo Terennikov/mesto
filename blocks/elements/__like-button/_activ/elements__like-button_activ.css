@@ -1,0 +1,13 @@
+.elements__like-button_activ {
+  background-image: url(../../../images/UnionActive.svg);
+  width: 22px;
+  height: 19px;
+  border: none;
+  margin-right: 0px;
+  margin-left: auto;
+  margin-top: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+

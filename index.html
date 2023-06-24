@@ -37,7 +37,7 @@
       </h3>
       <button type="button" name="close" class="popup__close">
       </button>
-      <form name="form" action="#" class="popup__form">
+      <form name="form" action="#" class="popup__form popup__form_type_edit">
         <input type="text" name="name" value="Жак-Ив Кусто" class="popup__input popup__input_type_name">
         <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details">
         <input type="submit" name="save-button" value="Сохранить" class="popup__save-button">
@@ -46,27 +46,27 @@
     </section>
     <section class="popup popup_type_add">
     <div class="popup__container" >
-      <h3 class="popup__title">
-        Новое место
-      </h3>
+      <h3 class="popup__title">Новое место</h3>
       <button type="button" name="close" class="popup__close">
       </button>
-      <form name="form" action="#" class="popup__form2">
+      <form name="form" action="#" class="popup__form popup__form_type_add">
         <input type="text" name="place" value="Название" class="popup__input popup__input_type_place">
         <input type="text" name="link" value="Ссылка на картинку" class="popup__input popup__input_type_link">
         <input type="submit" name="create-button" value="Создать" class="popup__create-button">
       </form>
     </div>
     </section>
-      <template class="elements__item" id="item">
-        <img src="" alt="" class="elements__photo">
-        <div class="elements__container">
-          <h2 class="elements__place"></h2>
-          <button type="button" name="like" class="elements__like-button"></button>
-          <button type="button" name="delete" class="elements__delete-button"></button>
-        </div>
-      </template>
   </div>
+  <template id="item">
+    <div class="elements__item">
+    <img src="" alt="" class="elements__photo">
+    <div class="elements__container">
+      <h2 class="elements__place"></h2>
+      <button type="button" name="like" class="elements__like-button"></button>
+      <button type="button" name="delete" class="elements__delete-button"></button>
+    </div>
+  </div>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
