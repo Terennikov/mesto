@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
+  <script defer src="./scripts/constants.js"></script>
+  <script defer src="./scripts/index.js"></script>
   <title>Путешествия по России</title>
 </head>
 <body class="body">
@@ -18,9 +20,9 @@
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <p class="profile__subtitle">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__edit-button">
+      <button type="button" class="profile__edit-button" aria-label="edit-button">
       </button>
-      <button type="button" class="profile__add-button">
+      <button type="button" class="profile__add-button" aria-label="add-button">
       </button>
     </section>
     <section id="elements-table" class="elements">
@@ -33,30 +35,30 @@
     <section class="popup popup_type_edit">
       <div class="popup__container popup__container_type_edit">
       <h3 class="popup__title">Редактировать профиль</h3>
-      <button type="button" name="close" class="popup__close">
+      <button type="button" name="close" class="popup__close" aria-label="Close">
       </button>
       <form name="form" action="#" class="popup__form popup__form_type_edit">
-        <input type="text" name="name" value="Жак-Ив Кусто" class="popup__input popup__input_type_name">
-        <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details">
-        <input type="submit" name="save-button" value="Сохранить" class="popup__save-button">
+        <input type="text" name="name" value="Жак-Ив Кусто" class="popup__input popup__input_type_name" placeholder="Имя" required>
+        <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details" placeholder="О себе" required>
+        <input type="submit" name="save-button" value="Сохранить" class="popup__save-button" aria-label="save-button">
       </form>
       </div>
     </section>
     <section class="popup popup_type_add">
     <div class="popup__container popup__container_type_add" >
       <h3 class="popup__title">Новое место</h3>
-      <button type="button" name="close" class="popup__close">
+      <button type="button" name="close" class="popup__close" aria-label="Close">
       </button>
       <form name="form" action="#" class="popup__form popup__form_type_add">
-        <input type="text" name="place" value="Название" class="popup__input popup__input_type_place">
-        <input type="text" name="link" value="Ссылка на картинку" class="popup__input popup__input_type_link">
+        <input type="text" name="place" value="Название" class="popup__input popup__input_type_place" placeholder="О месте" required>
+        <input type="url" name="link" value="Ссылка на картинку" class="popup__input popup__input_type_link" placeholder="Ссылка на фотографию" required>
         <input type="submit" name="create-button" value="Создать" class="popup__create-button">
       </form>
     </div>
     </section>
     <section class="popup popup_type_image">
       <figure class="popup__container popup__container_type_image">
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__close" aria-label="Close"></button>
         <img class="popup__image" src="#" alt="">
         <figcaption class="popup__image-name"></figcaption>
       </figure>
@@ -67,11 +69,10 @@
     <img src="#" alt="" class="elements__photo">
     <div class="elements__container">
       <h2 class="elements__place"></h2>
-      <button type="button" name="like" class="elements__like-button"></button>
-      <button type="button" name="delete" class="elements__delete-button"></button>
+      <button type="button" name="like" class="elements__like-button" aria-label="like-button"></button>
+      <button type="button" name="delete" class="elements__delete-button" aria-label="delete-button"></button>
     </div>
   </div>
   </template>
-  <script src="./scripts/index.js"></script>
 </body>
 </html>
