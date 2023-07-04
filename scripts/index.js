@@ -1,4 +1,3 @@
-
 function like(evt) {
   evt.currentTarget.classList.toggle("elements__like-button_activ");
 }
@@ -8,6 +7,12 @@ function deleteItem (evt) {
 }
 
 // Рендер карточек из массива
+
+const renderCard = (name, link) =>{
+  const newCard = createCard(name, link);
+  elements.prepend(newCard);
+};
+
 
 function createCard(name, link) {
   const itemElement = elementsItem.cloneNode(true);
@@ -20,56 +25,37 @@ function createCard(name, link) {
   elementsPhoto.src = link;
   elementsPhoto.alt = name;
 
-  elements.prepend(itemElement);
-  openCards();
-
-  deleteButton.addEventListener('click', deleteItem);
   likeButton.addEventListener('click', like);
+  deleteButton.addEventListener('click', deleteItem);
+  
+  elementsPhoto.addEventListener('click', openCard);
+  
+  return itemElement;
 }
 
 
 initialCards.forEach(item => {
-  createCard(item.name, item.link);
+  renderCard(item.name, item.link);
 });
 
 
 
+function openCard(evt){
+  const card = evt.target.parentElement;
+  popupImages.classList.add('popup_opened');
 
-
-const elementsItems = document.querySelector('.elements__item');
-const elementsPlace = document.querySelector('.elements__place');
-const elementsPhoto = document.querySelector('.elements__photo');
-
-let likeButton = document.querySelector(".elements__like-button");
-
-
-
-
-// elementsOpen();
-
-function openCards(params) {
-  let elementsPhotos = document.querySelectorAll('.elements__photo');
-  
-  elementsPhotos.forEach(element => {
-    element.addEventListener('click', (element)=>{
-        popupImages.classList.add('popup_opened');
-        let card = element.target.parentElement;
-        let elementPlace = card.querySelector(".elements__place");
+  const elementPlace = card.querySelector(".elements__place");
+  const srcCard = card.querySelector(".elements__photo").src;
+  const altCard = card.querySelector(".elements__photo").alt;
       
-        let srcCard = card.querySelector(".elements__photo").src;
-        let altCard = card.querySelector(".elements__photo").alt;
-      
-      
-        popupImageName.textContent = elementPlace.textContent; //?
-        popupImage.src = srcCard; 
-        popupImage.alt = altCard;
-    });
-  })
-};
+  popupImageName.textContent = elementPlace.textContent; //?
+  popupImage.src = srcCard; 
+  popupImage.alt = altCard;
+}
 
 
 
-// закрытие попапов
+// закрытие, открытие попапов
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened')
@@ -80,30 +66,16 @@ function openPopup(popupElement) {
 }
 
 popups.forEach(element => { 
-
   element.addEventListener("click", (event)=>{
-    const button = element.querySelector(".popup__close");
-    button.addEventListener("click", ()=>{
-      element.classList.remove("popup_opened");
-    });
-
-    function closePopupByClickOverlay(evt) {
-      if (evt.target === evt.currentTarget) closePopup(popup);
-    }
-
-    element.addEventListener("click", closePopupByClickOverlay(event));
+      const button = element.querySelector(".popup__close");
+      button.addEventListener("click", ()=>{
+        closePopup(element);
+      });
   });
 });
 
-popups.forEach((popup) => {
 
-  function closePopupByClickOverlay(evt) {
-      if (evt.target === evt.currentTarget) closePopup(popup);
-  }
 
-  popup.addEventListener("click", closePopupByClickOverlay);
-});
-  
 // Кнопки и формы 
 
 editButton.addEventListener('click', () => {
@@ -128,23 +100,8 @@ addForm.addEventListener('submit', (event) => {
 
   const nameInput =  addForm.querySelector(".popup__input_type_place").value;
   const linkInput = addForm.querySelector(".popup__input_type_link").value;
-  // addItem();
 
-  createCard(nameInput, linkInput);
-
+  renderCard(nameInput, linkInput);
   addForm.reset();
-
   closePopup(popupAdd);
-  elementsPhotos = document.querySelectorAll('.elements__photo');
-
-  let newElementPhoto = elementsPhotos[0];
-  let itemElement = newElementPhoto.parentElement;
-
-  likeButton = itemElement.querySelector('.elements__like-button');
-  deleteButton = itemElement.querySelector(".elements__delete-button");
-
-  deleteButton.addEventListener('click', deleteItem);
-  likeButton.addEventListener('click', like);
 })
-
-
