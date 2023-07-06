@@ -40,9 +40,12 @@ initialCards.forEach(item => {
 
 
 
+// закрытие, открытие попапов
+
 function openCard(evt){
   const card = evt.target.parentElement;
-  popupImages.classList.add('popup_opened');
+
+  openPopup(popupImages);
 
   const elementPlace = card.querySelector(".elements__place");
   const srcCard = card.querySelector(".elements__photo").src;
@@ -51,18 +54,30 @@ function openCard(evt){
   popupImageName.textContent = elementPlace.textContent; //?
   popupImage.src = srcCard; 
   popupImage.alt = altCard;
+
+  document.addEventListener("keydown", closePopupEsc);
 }
 
+const closePopupEsc = (event) => {
+  const popup = document.querySelector('.popup_opened');
 
-
-// закрытие, открытие попапов
+  if (event.key === "Escape") {
+      closePopup(popup);
+  }
+}
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened')
+  document.removeEventListener("keydown", closePopupEsc);
 }
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
+  inputs.forEach((input) => {
+    const errElement = document.querySelector(`#err-${input.id}`)
+    setInputInvalidState(input, errElement, enableValidation)
+})
+  document.addEventListener("keydown", closePopupEsc);
 }
 
 popups.forEach(element => { 
@@ -72,8 +87,13 @@ popups.forEach(element => {
         closePopup(element);
       });
   });
-});
 
+  element.addEventListener("click", (evt) =>{
+    if (evt.target === evt.currentTarget) closePopup(element);
+  });
+
+  element.addEventListener('keydown', closePopupEsc);
+});
 
 
 // Кнопки и формы 
@@ -82,10 +102,17 @@ editButton.addEventListener('click', () => {
   openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   detailInput.value = profileSubtitle.textContent;
+  const form = document.querySelector('.popup__form_edit');
+  toggleButtonValidity(form, enableValidation);
+  console.log(toggleButtonValidity)
 })
 
 addButton.addEventListener('click', () => {
   openPopup(popupAdd);
+  const form = document.querySelector('.popup__form_add');
+    toggleButtonValidity(form, enableValidation);
+    console.log(toggleButtonValidity)
+    addForm.reset();
 })
 
 editForm.addEventListener('submit', (event) => {

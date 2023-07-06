@@ -26,6 +26,7 @@ const elementsItem = document.querySelector('#item').content;
 
 const popups = document.querySelectorAll(".popup");
 
+
 const initialCards = [
   {
     name: 'Архыз',
