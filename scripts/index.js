@@ -29,7 +29,6 @@ function createCard(name, link) {
   deleteButton.addEventListener('click', deleteItem);
   
   elementsPhoto.addEventListener('click', openCard);
-  
   return itemElement;
 }
 
@@ -39,8 +38,6 @@ initialCards.forEach(item => {
 });
 
 
-
-// закрытие, открытие попапов
 
 function openCard(evt){
   const card = evt.target.parentElement;
@@ -54,17 +51,16 @@ function openCard(evt){
   popupImageName.textContent = elementPlace.textContent; //?
   popupImage.src = srcCard; 
   popupImage.alt = altCard;
-
-  document.addEventListener("keydown", closePopupEsc);
 }
 
 const closePopupEsc = (event) => {
-  const popup = document.querySelector('.popup_opened');
-
   if (event.key === "Escape") {
+      const popup = document.querySelector('.popup_opened');
       closePopup(popup);
   }
 }
+
+// закрытие, открытие попапов
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened')
@@ -73,27 +69,36 @@ function closePopup(popupElement) {
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
-  inputs.forEach((input) => {
-    const errElement = document.querySelector(`#err-${input.id}`)
-    setInputInvalidState(input, errElement, enableValidation)
-})
+
+  // находим все input-ы формы помещаем в массив
+  const inputs = Array.from(popupElement.querySelectorAll(enableValidation.inputSelector));
+
+  if (inputs.length != 0){
+    inputs.forEach((input) => {
+      const errElement = document.querySelector(`#err-${input.id}`)
+      setInputInvalidState(input, errElement, enableValidation)
+    })
+  }
+  // если массив не пустой, то проводим валидацию
+
+  
   document.addEventListener("keydown", closePopupEsc);
 }
 
 popups.forEach(element => { 
-  element.addEventListener("click", (event)=>{
-      const button = element.querySelector(".popup__close");
+  const button = element.querySelector(".popup__close");
       button.addEventListener("click", ()=>{
         closePopup(element);
-      });
   });
 
   element.addEventListener("click", (evt) =>{
     if (evt.target === evt.currentTarget) closePopup(element);
   });
 
-  element.addEventListener('keydown', closePopupEsc);
+  
 });
+
+
 
 
 // Кнопки и формы 
@@ -102,17 +107,17 @@ editButton.addEventListener('click', () => {
   openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   detailInput.value = profileSubtitle.textContent;
-  const form = document.querySelector('.popup__form_edit');
-  toggleButtonValidity(form, enableValidation);
-  console.log(toggleButtonValidity)
+
+  toggleButtonValidity(editForm, enableValidation)
+
 })
 
 addButton.addEventListener('click', () => {
   openPopup(popupAdd);
-  const form = document.querySelector('.popup__form_add');
-    toggleButtonValidity(form, enableValidation);
-    console.log(toggleButtonValidity)
-    addForm.reset();
+
+  toggleButtonValidity(addForm, enableValidation)
+
+  addForm.reset() 
 })
 
 editForm.addEventListener('submit', (event) => {
@@ -125,10 +130,7 @@ editForm.addEventListener('submit', (event) => {
 addForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const nameInput =  addForm.querySelector(".popup__input_type_place").value;
-  const linkInput = addForm.querySelector(".popup__input_type_link").value;
-
-  renderCard(nameInput, linkInput);
+  renderCard(placeInput.value, linkInput.value);
   addForm.reset();
   closePopup(popupAdd);
 })

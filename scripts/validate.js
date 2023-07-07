@@ -7,8 +7,6 @@ const enableValidation = {
     errorClass: "popup__error_visible",
 };
 
-const inputs = Array.from(document.querySelectorAll(enableValidation.inputSelector));
-
 const setInputValidState = (input, errElement, enableValidation) => {
     input.classList.add(enableValidation.inputErrorClass)
     errElement.classList.add(enableValidation.errorClass)
