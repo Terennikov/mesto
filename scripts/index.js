@@ -70,18 +70,6 @@ function closePopup(popupElement) {
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened')
 
-  // находим все input-ы формы помещаем в массив
-  const inputs = Array.from(popupElement.querySelectorAll(enableValidation.inputSelector));
-
-  if (inputs.length != 0){
-    inputs.forEach((input) => {
-      const errElement = document.querySelector(`#err-${input.id}`)
-      setInputInvalidState(input, errElement, enableValidation)
-    })
-  }
-  // если массив не пустой, то проводим валидацию
-
-  
   document.addEventListener("keydown", closePopupEsc);
 }
 
@@ -108,14 +96,14 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   detailInput.value = profileSubtitle.textContent;
 
-  toggleButtonValidity(editForm, enableValidation)
+  toggleButtonValidity(editForm, config)
 
 })
 
 addButton.addEventListener('click', () => {
   openPopup(popupAdd);
 
-  toggleButtonValidity(addForm, enableValidation)
+  toggleButtonValidity(addForm, config)
 
   addForm.reset() 
 })
