@@ -7,16 +7,16 @@ export default class FormValidator {
       this._errorClass = config.errorClass
       this._inputSelector = document.querySelectorAll(config.inputSelector)
       this._inputs = Array.from(this._inputSelector)
-      this._submitButton = form.querySelector(this._submitButtonSelector)
+      this._submitButton = this._form.querySelector(this._submitButtonSelector)
     }
   
     enableValidation () {
       this._setEventListeners(this._form)
     }
   
-    _resetValidation (form) {
-      this._toggleButtonValidity(form)
-  
+    _resetValidation () {
+      this._toggleButtonValidity(this._form)
+
       this._inputs.forEach((inputElement) => {
         this._errorMassage(inputElement)
       })
@@ -27,13 +27,13 @@ export default class FormValidator {
       this._setInputInvalidState(input, errElement)
     }
   
-    _setEventListeners (form) {
-      this._setSubmitListener(form)
-      this._resetValidation(form)
+    _setEventListeners () {
+      this._setSubmitListener(this._form)
+      this._resetValidation(this._form)
       this._inputs.forEach((input) => {
         input.addEventListener('input', () => {
           this._checkInputValidity(input)
-          this._toggleButtonValidity(form)
+          this._toggleButtonValidity(this._form)
         })
       })
     }
@@ -48,15 +48,15 @@ export default class FormValidator {
       }
     }
   
-    _setSubmitListener (form) {
-      form.addEventListener('submit', (event) => {
+    _setSubmitListener () {
+      this._form.addEventListener('submit', (event) => {
         event.preventDefault();
-        this._toggleButtonValidity(form)
+        this._toggleButtonValidity(this._form)
       });
     }
   
-    _toggleButtonValidity = (form) => {
-      if ( form.checkValidity() ) {
+    _toggleButtonValidity = () => {
+      if ( this._form.checkValidity() ) {
         this._enableButton(this._submitButton)
       } else {
         this._disableButton(this._submitButton)
@@ -75,13 +75,13 @@ export default class FormValidator {
       errElement.textContent = ''
     }
   
-    _disableButton = (button) => {
-      button.setAttribute('disabled', '')
-      button.classList.add(this._inactiveButtonClass)
+    _disableButton = () => {
+      this._submitButton.setAttribute('disabled', '')
+      this._submitButton.classList.add(this._inactiveButtonClass)
     }
   
-    _enableButton = (button) => {
-      button.removeAttribute('disabled');
-      button.classList.remove(this._inactiveButtonClass)
+    _enableButton = () => {
+      this._submitButton.removeAttribute('disabled');
+      this._submitButton.classList.remove(this._inactiveButtonClass)
     }
   }

@@ -88,16 +88,17 @@ popups.forEach(element => {
 
 // Кнопки и формы 
 
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+
 editButton.addEventListener('click', () => {
   openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   detailInput.value = profileSubtitle.textContent;
-  profileFormValidator.enableValidation()
 })
 
 addButton.addEventListener('click', () => {
   openPopup(popupAdd);
-  cardFormValidator.enableValidation()
   addForm.reset() 
 })
 
@@ -113,7 +114,9 @@ addForm.addEventListener('submit', (event) => {
   const name = nameInput.value
   const link = linkInput.value
   const elementData = {name, link}
+
   renderElement(createNewCard(elementData, openPopup, elementTemplate))
   addForm.reset();
+
   closePopup(popupAdd);
 })

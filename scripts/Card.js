@@ -9,9 +9,6 @@ export default class Card {
     this._elementsPhoto = this._card.querySelector('.elements__photo')
     this._likeElement = this._card.querySelector('.elements__like-button')
     this._deleteElement = this._card.querySelector('.elements__delete-button')
-    this._popupImage = document.querySelector('.popup_type_image')
-    this._popupImageContainer = this._popupImage.querySelector('.popup__image')
-    this._popupName = this._popupImage.querySelector('.popup__image-name')
   }
 
   generate () {
@@ -29,6 +26,10 @@ export default class Card {
   }
 
   _handleImageClick () {
+    this._popupImage = document.querySelector('.popup_type_image');
+    this._popupImageContainer = this._popupImage.querySelector('.popup__image')
+    this._popupName = this._popupImage.querySelector('.popup__image-name')
+
     this._openPopup(this._popupImage)
     this._popupImageContainer.src = this._element.link
     this._popupImageContainer.alt = this._element.name
@@ -41,5 +42,6 @@ export default class Card {
 
   _handleDelete () {
     this._card.remove()
+    this._card = null;
   }
 }
