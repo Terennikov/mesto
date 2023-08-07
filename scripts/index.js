@@ -8,6 +8,7 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
+
 const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
 const editForm = document.querySelector('.popup__form_type_edit');
@@ -17,12 +18,13 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const detailInput = document.querySelector('.popup__input_type_details');
 const popupAdd = document.querySelector('.popup_type_add');
 const addForm = document.querySelector('.popup__form_type_add');
+const submitButton = addForm.querySelector('.popup__submit-button')
 const placeInput = document.querySelector('.popup__input_type_place');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupClose = document.querySelector('.popup__close');
-const popupImages = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
-const popupImageName = document.querySelector('.popup__image-name');
+export const popupImage = document.querySelector('.popup_type_image');
+export const popupImageContainer = document.querySelector('.popup__image');
+export const popupImageName = document.querySelector('.popup__image-name');
 
 const elements =  document.querySelector('.elements');
 const elementsItem = document.querySelector('#item').content;
@@ -98,6 +100,7 @@ editButton.addEventListener('click', () => {
 })
 
 addButton.addEventListener('click', () => {
+  submitButton.classList.add('popup_opened')
   openPopup(popupAdd);
   addForm.reset() 
 })
@@ -117,6 +120,5 @@ addForm.addEventListener('submit', (event) => {
 
   renderElement(createNewCard(elementData, openPopup, elementTemplate))
   addForm.reset();
-
   closePopup(popupAdd);
 })

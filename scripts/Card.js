@@ -1,3 +1,5 @@
+import { popupImage, popupImageContainer, popupImageName } from './index.js';
+
 export default class Card {
   constructor (element, openPopup, template) {
     this._openPopup = openPopup
@@ -26,14 +28,13 @@ export default class Card {
   }
 
   _handleImageClick () {
-    this._popupImage = document.querySelector('.popup_type_image');
-    this._popupImageContainer = this._popupImage.querySelector('.popup__image')
-    this._popupName = this._popupImage.querySelector('.popup__image-name')
-
+    this._popupImage = popupImage;
+    this._popupImageContainer = popupImageContainer;
+    this._popupImageName= popupImageName;
     this._openPopup(this._popupImage)
     this._popupImageContainer.src = this._element.link
     this._popupImageContainer.alt = this._element.name
-    this._popupName.textContent = this._element.name
+    this._popupImageName.textContent = this._element.name
   }
 
   _handleLike () {

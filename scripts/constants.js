@@ -34,4 +34,6 @@ const config = {
   errorClass: "popup__error_visible",
 };
 
+ 
+
 export { initialCards, config }
