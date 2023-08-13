@@ -1,9 +1,8 @@
-import { popupImage, popupImageContainer, popupImageName } from './index.js';
-
 export default class Card {
-  constructor (element, openPopup, template) {
+  constructor (element, openPopup, template, handleImageClick) {
     this._openPopup = openPopup
     this._element = element
+    this._handleImageClick = handleImageClick;
     this._card = template.content
     .querySelector('.elements__item')
     .cloneNode(true)
@@ -11,6 +10,7 @@ export default class Card {
     this._elementsPhoto = this._card.querySelector('.elements__photo')
     this._likeElement = this._card.querySelector('.elements__like-button')
     this._deleteElement = this._card.querySelector('.elements__delete-button')
+    
   }
 
   generate () {
@@ -22,19 +22,9 @@ export default class Card {
   }
 
   _setEventListeners () {
-    this._elementsPhoto.addEventListener('click', () => this._handleImageClick())
+    this._elementsPhoto.addEventListener('click', () => this._handleImageClick({name: this._element.name, link: this._element.link}))
     this._likeElement.addEventListener('click', () => this._handleLike())
     this._deleteElement.addEventListener('click', () => this._handleDelete())
-  }
-
-  _handleImageClick () {
-    this._popupImage = popupImage;
-    this._popupImageContainer = popupImageContainer;
-    this._popupImageName= popupImageName;
-    this._openPopup(this._popupImage)
-    this._popupImageContainer.src = this._element.link
-    this._popupImageContainer.alt = this._element.name
-    this._popupImageName.textContent = this._element.name
   }
 
   _handleLike () {

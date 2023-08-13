@@ -22,12 +22,13 @@ const submitButton = addForm.querySelector('.popup__submit-button')
 const placeInput = document.querySelector('.popup__input_type_place');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupClose = document.querySelector('.popup__close');
-export const popupImage = document.querySelector('.popup_type_image');
-export const popupImageContainer = document.querySelector('.popup__image');
-export const popupImageName = document.querySelector('.popup__image-name');
+const popupImage = document.querySelector('.popup_type_image');
+const popupImageContainer = document.querySelector('.popup__image');
+const popupImageName = document.querySelector('.popup__image-name');
 
 const elements =  document.querySelector('.elements');
 const elementsItem = document.querySelector('#item').content;
+const element = document.querySelector('.elements__item')
 const elementTemplate = document.querySelector('.elements-template');
 
 const popups = document.querySelectorAll(".popup");
@@ -35,7 +36,7 @@ const popups = document.querySelectorAll(".popup");
 // Рендер карточек
 
 const createNewCard = (element, openPopup, template) => {
-  const card = new Card(element, openPopup, template)
+  const card = new Card(element, openPopup, template, handleImageClick)
   return card.generate()
 }
 
@@ -52,7 +53,7 @@ const renderElementAdd = (element) => {
 }
 
 initialCards.forEach(element => {
-  renderElementAdd(createNewCard(element, openPopup, elementTemplate))
+  renderElementAdd(createNewCard(element, openPopup, elementTemplate, handleImageClick))
 })
 
 // закрытие, открытие попапов
@@ -85,8 +86,14 @@ popups.forEach(element => {
     if (evt.target === evt.currentTarget) closePopup(element);
   });
 
-  
 });
+
+function handleImageClick (element) {
+  openPopup(popupImage)
+  popupImageContainer.src = element.link;
+  popupImageContainer.alt = element.name;
+  popupImageName.textContent = element.name;
+}
 
 // Кнопки и формы 
 
@@ -100,7 +107,6 @@ editButton.addEventListener('click', () => {
 })
 
 addButton.addEventListener('click', () => {
-  submitButton.classList.add('popup_opened')
   openPopup(popupAdd);
   addForm.reset() 
 })
@@ -114,7 +120,7 @@ editForm.addEventListener('submit', (event) => {
 
 addForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const name = nameInput.value
+  const name = placeInput.value
   const link = linkInput.value
   const elementData = {name, link}
 
