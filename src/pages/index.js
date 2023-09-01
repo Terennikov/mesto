@@ -38,7 +38,7 @@ const imageSelector = ".popup_type_image"
 const profileSelector = ".popup_type_edit"
 const cardSelector = ".popup_type_add"
 const templateSelector = ".elements-template"
-const containerSelector = ".elements__container"
+const containerSelector = "#elements-table"
 
 // Рендер карточек
 
