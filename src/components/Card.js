@@ -1,3 +1,4 @@
+
 export default class Card {
     constructor (element, template, handleCardClick) {
       this._template = template

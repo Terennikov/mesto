@@ -14,9 +14,9 @@ export default class FormValidator {
       this._setEventListeners(this._form)
     }
   
-    _resetValidation () {
+    resetValidation () {
       this._toggleButtonValidity(this._form)
-
+  
       this._inputs.forEach((inputElement) => {
         this._errorMassage(inputElement)
       })
@@ -27,13 +27,12 @@ export default class FormValidator {
       this._setInputInvalidState(input, errElement)
     }
   
-    _setEventListeners () {
-      this._setSubmitListener(this._form)
-      this._resetValidation(this._form)
+    _setEventListeners (form) {
+      this._setSubmitListener(form)
       this._inputs.forEach((input) => {
-        input.addEventListener('input', () => {
+        input.addEventListener("input", () => {
           this._checkInputValidity(input)
-          this._toggleButtonValidity(this._form)
+          this._toggleButtonValidity(form)
         })
       })
     }
@@ -48,16 +47,15 @@ export default class FormValidator {
       }
     }
   
-    _setSubmitListener () {
-      this._form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        this._toggleButtonValidity(this._form);
-        this._disableButton(this._submitButton);
-      });
+    _setSubmitListener (form) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault()
+        this._toggleButtonValidity(form)
+      })
     }
   
-    _toggleButtonValidity = () => {
-      if ( this._form.checkValidity() ) {
+    _toggleButtonValidity = (form) => {
+      if ( form.checkValidity() ) {
         this._enableButton(this._submitButton)
       } else {
         this._disableButton(this._submitButton)
@@ -76,13 +74,13 @@ export default class FormValidator {
       errElement.textContent = ''
     }
   
-    _disableButton = () => {
-      this._submitButton.setAttribute('disabled', '')
-      this._submitButton.classList.add(this._inactiveButtonClass)
+    _disableButton = (button) => {
+      button.setAttribute('disabled', '')
+      button.classList.add(this._inactiveButtonClass)
     }
   
-    _enableButton = () => {
-      this._submitButton.removeAttribute('disabled');
-      this._submitButton.classList.remove(this._inactiveButtonClass)
+    _enableButton = (button) => {
+      button.removeAttribute('disabled');
+      button.classList.remove(this._inactiveButtonClass)
     }
   }

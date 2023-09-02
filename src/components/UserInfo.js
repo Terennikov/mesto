@@ -1,18 +1,18 @@
 export default class UserInfo {
-    constructor (userNameSelector, userAboutSelector) {
+    constructor (userNameSelector, userDetailsSelector) {
       this._userName = userNameSelector
-      this._userAbout = userAboutSelector
+      this._userDetails = userDetailsSelector
     }
   
     getUserInfo () {
       return {
         name: this._userName.textContent,
-        about: this._userAbout.textContent
+        details: this._userDetails.textContent
       }
     }
   
     setUserInfo (info) {
       this._userName.textContent = info.name
-      this._userAbout.textContent = info.about
+      this._userDetails.textContent = info.details
     }
   }

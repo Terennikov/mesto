@@ -1,12 +1,12 @@
 // Обозначение элементов
 import "./index.css"
-import { initialCards, config } from "../scripts/constants.js"
-import FormValidator from "../scripts/FormValidator.js"
-import UserInfo from "../scripts/UserInfo.js"
-import PopupWithImage from "../scripts/PopupWithImage.js"
-import Section from "../scripts/Section.js"
-import createCard from "../scripts/createCard.js"
-import PopupWithForm from "../scripts/PopupWithForm.js"
+import { initialCards, config } from "../utils/constants.js"
+import FormValidator from "../components/FormValidator.js"
+import UserInfo from "../components/UserInfo.js"
+import PopupWithImage from "../components/PopupWithImage.js"
+import Section from "../components/Section.js"
+import createCard from "../utils/createCard.js"
+import PopupWithForm from "../components/PopupWithForm.js"
 
 
 
@@ -104,7 +104,7 @@ const cardPopup = new PopupWithForm(cardSelector, (data) => {
 cardPopup.setEventListeners()
 
 addButton.addEventListener("click", () => {
-  cardFormValidator.resetValidation(popupAddForm)
+  cardFormValidator.resetValidation(addForm)
   cardPopup.open()
  })
  
