@@ -1,110 +1,180 @@
 // Обозначение элементов
 import "./index.css"
-import { initialCards, config } from "../utils/constants.js"
+import { 
+  validationConfig, 
+  profileTitle,
+  profileSubtitle,
+  profileImage,
+  editButton,
+  addButton,
+  editForm,
+  addForm,
+  popupAvatarForm,
+  imageSelector,
+  profileSelector,
+  cardSelector,
+  templateSelector,
+  containerSelector,
+  apiToken,
+  groupId,
+  apiURL,
+  itemDeleteSelector,
+  popupAvatarSelector,
+  buttonAvatar
+} from "../utils/constants.js"
 import FormValidator from "../components/FormValidator.js"
 import UserInfo from "../components/UserInfo.js"
 import PopupWithImage from "../components/PopupWithImage.js"
 import Section from "../components/Section.js"
 import createCard from "../utils/createCard.js"
 import PopupWithForm from "../components/PopupWithForm.js"
-
-
-
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-
-
-const popup = document.querySelector('.popup');
-const editForm = document.querySelector('.popup__form_type_edit');
-const nameInput = document.querySelector('.popup__input_type_name');
-const detailInput = document.querySelector('.popup__input_type_details');
-const addForm = document.querySelector('.popup__form_type_add');
-const placeInput = document.querySelector('.popup__input_type_place');
-const linkInput = document.querySelector('.popup__input_type_link');
-const popupClose = document.querySelector('.popup__close');
-const popupImage = document.querySelector('.popup_type_image');
-const popupImageContainer = document.querySelector('.popup__image');
-const popupImageName = document.querySelector('.popup__image-name');
-
-const elements =  document.querySelector('.elements');
-const elementsItem = document.querySelector('#item').content;
-const element = document.querySelector('.elements__item')
-const elementTemplate = document.querySelector('.elements-template');
-
-const popups = document.querySelectorAll(".popup");
-const imageSelector = ".popup_type_image"
-const profileSelector = ".popup_type_edit"
-const cardSelector = ".popup_type_add"
-const templateSelector = ".elements-template"
-const containerSelector = "#elements-table"
+import { Api } from "../components/Api"
+import PopupDelete from "../components/PopupDelete"
 
 // Рендер карточек
 
-const userInfo = new UserInfo(profileTitle, profileSubtitle)
+let myId = ""
+
+const api = new Api(apiToken, groupId, apiURL)
+
+const userInfo = new UserInfo(profileTitle, profileSubtitle, profileImage)
 
 const imagePopup = new PopupWithImage(imageSelector)
-imagePopup.setEventListeners()
 
-const cardFormValidator = new FormValidator(config, addForm)
+const cardFormValidator = new FormValidator(validationConfig, addForm)
+
+const profileFormValidator = new FormValidator(validationConfig, editForm)
+
+const avatarPopup = new PopupWithForm(popupAvatarSelector, (formData) => {
+  avatarPopup.setSubmitButtonText("Сохранить...")
+  api
+  .updateUserAvatar(formData)
+  .then((res) => {
+    userInfo.setUserInfo(res)
+    avatarPopup.close()
+  })
+  .catch((err) => console.error(`Ошибка: ${ err }`))
+  .finally(() => avatarPopup.setDefaultSubmitButtonText())
+})
+
+const avatarFormValidation = new FormValidator(validationConfig, popupAvatarForm)
+
+// формы 
+
+const profilePopup = new PopupWithForm(profileSelector, (formData) => {
+  profilePopup.setSubmitButtonText("Сохранить...")
+  api
+  .updateUser(formData)
+  .then((res) => {
+    userInfo.setUserInfo(res)
+    profilePopup.close()
+  })
+  .catch((err) => console.error(`Ошибка: ${ err }`))
+  .finally(() => profilePopup.setDefaultSubmitButtonText())
+})
+
+const cardPopup = new PopupWithForm(cardSelector, (formData) => {
+  cardPopup.setSubmitButtonText("Создать...")
+  api
+  .createCard(formData)
+  .then((cardData) => {
+    cardsSection.addItem(
+      createCard(
+        cardData,
+        templateSelector,
+        imagePopup.open,
+        popupDelete.open,
+        myId,
+        handleLike
+      )
+    )
+    cardPopup.close()
+  })
+  .catch((err) => console.error(`Ошибка: ${ err }`))
+  .finally(() => cardPopup.setDefaultSubmitButtonText())
+})
+
+const popupDelete = new PopupDelete(itemDeleteSelector, (element) => {
+  popupDelete.setSubmitButtonText("Да...")
+  api
+  .deleteCard(element.getCardId())
+  .then(() => {
+    element.removeCard()
+    popupDelete.close()
+  })
+  .catch((err) => console.error(`Ошибка: ${ err }`))
+  .finally(() => popupDelete.setDefaultSubmitButtonText())
+})
+
+const cardsSection = new Section(
+  {
+    renderer: (item) => {
+      const newCard = createCard(
+        item, templateSelector, imagePopup.open, popupDelete.open, myId, handleLike
+      )
+      cardsSection.addItem(newCard)
+    }
+  },
+  containerSelector
+)
+
+const handleLike = (element) => {
+  if ( element.isLike() ) {
+    api
+    .removeCardLike(element.getCardId())
+    .then((res) => {
+      element.updateLikes(res.likes)
+      element.handleLikeToggle()
+    })
+    .catch((err) => console.error(`Ошибка: ${ err }`))
+  } else
+    api
+    .likeCard(element.getCardId())
+    .then((res) => {
+      element.updateLikes(res.likes)
+      element.handleLikeToggle()
+    })
+    .catch((err) => console.error(`Ошибка: ${ err }`))
+}
+// Валидация
+
 cardFormValidator.enableValidation()
 
-const profileFormValidator = new FormValidator(config, editForm)
 profileFormValidator.enableValidation()
 
+avatarFormValidation.enableValidation()
 
-const cardList = new Section({
-  data: initialCards, renderer: (item) => {
-    const newCard = createCard(item, templateSelector, imagePopup.open)
-    cardList.addItem(newCard)
-  }
-},
-containerSelector
-)
-cardList.renderItems()
+cardPopup.setEventListeners()
 
-// function handleImageClick (element) {
-//   openPopup(popupImage)
-//   popupImageContainer.src = element.link;
-//   popupImageContainer.alt = element.name;
-//   popupImageName.textContent = element.name;
-// }
-
-// Кнопки и формы 
-
-// profileFormValidator.enableValidation();
-// cardFormValidator.enableValidation();
-
-
-
-const profilePopup = new PopupWithForm(profileSelector, (data) => {
-  userInfo.setUserInfo(data)
-  profilePopup.close()
-})
 profilePopup.setEventListeners()
 
-// editForm.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   profileTitle.textContent = nameInput.value;
-//   profileSubtitle.textContent = detailInput.value;
-//   closePopup(popup);
-// })
+popupDelete.setEventListeners()
+
+imagePopup.setEventListeners()
+
+avatarPopup.setEventListeners()
+
+api
+.getAppInfo()
+.then(([ cardsData, userData ]) => {
+  userInfo.setUserInfo(userData)
+  myId = userData._id
+  cardsSection.renderItems(cardsData.reverse())
+})
+
+// кнопки 
 
 editButton.addEventListener("click", () => {
   profilePopup.setInputValue(userInfo.getUserInfo())
   profilePopup.open()
 })
 
-const cardPopup = new PopupWithForm(cardSelector, (data) => {
-  const newCard = createCard(data, templateSelector, imagePopup.open)
-  cardList.addItem(newCard)
-  cardPopup.close()
-})
-cardPopup.setEventListeners()
-
 addButton.addEventListener("click", () => {
-  cardFormValidator.resetValidation(addForm)
+  cardFormValidator.resetValidation()
   cardPopup.open()
  })
  
+ buttonAvatar.addEventListener("click", () => {
+  avatarFormValidation.resetValidation()
+  avatarPopup.open()
+})

@@ -5,30 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Путешествия по России</title>
 </head>
+
 <body class="body">
   <div class="page">
+
     <header class="header">
         <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Лого">
     </header>
+
     <main class="main">
+
     <section class="profile">
-      <img src="<%=require('./images/Avatar.png')%>" alt="Портрет Жака Ива" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <button class="profile__avatar-edit"></button>
+        <img class="profile__avatar" src="#" alt="Аватар профиля">
+      </div>
       <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <h1 class="profile__title"></h1>
+        <p class="profile__subtitle"></p>
       </div>
       <button type="button" class="profile__edit-button" aria-label="edit-button">
       </button>
       <button type="button" class="profile__add-button" aria-label="add-button">
       </button>
     </section>
+
     <section id="elements-table" class="elements">
 
     </section>
   </main>
+
     <footer class="footer">
       <img class="footer__logo" src="<%=require('./images/Footer.png')%>" alt="Место копирайт">
     </footer>
+
     <section class="popup popup_type_edit">
       <div class="popup__container popup__container_type_edit">
         <h3 class="popup__title">Редактировать профиль</h3>
@@ -37,12 +47,13 @@
         <form name="form" action="#" class="popup__form popup__form_type_edit">
           <input type="text" name="name" value="Жак-Ив Кусто" class="popup__input popup__input_type_name" placeholder="Имя" required id="name" autocomplete="off" minlength="2" maxlength="200">
           <span id="err-name" class="popup__error"></span>
-          <input type="text" name="details" value="Исследователь океана" class="popup__input popup__input_type_details" placeholder="О себе" required id="detail" autocomplete="off" minlength="2" maxlength="200">
-          <span id="err-detail" class="popup__error"></span>
+          <input type="text" name="about" value="Исследователь океана" class="popup__input popup__input_type_about" placeholder="О себе" required id="about" autocomplete="off" minlength="2" maxlength="200">
+          <span id="err-about" class="popup__error"></span>
           <input type="submit" name="save-button" value="Сохранить" class="popup__submit-button popup__submit-button_disabled" aria-label="save-button">
         </form>
       </div>
     </section>
+
     <section class="popup popup_type_add">
     <div class="popup__container popup__container_type_add" >
       <h3 class="popup__title">Новое место</h3>
@@ -57,6 +68,7 @@
       </form>
     </div>
     </section>
+
     <section class="popup popup_type_image">
       <figure class="popup__container popup__container_type_image">
         <button type="button" class="popup__close" aria-label="Close"></button>
@@ -65,15 +77,63 @@
       </figure>
   </section>
   </div>
+
+  <section class="popup popup_type_delete">
+    <div class="popup__container popup__container_type_delete">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="popup__close"></button>
+      <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
+      <form
+        class="popup__form popup__form_type_delete"
+        name="delete-form"
+        novalidate>
+        <button type="submit" class="popup__submit-button">Да</button>
+      </form>
+    </div>
+  </section>
+  
+  <section class="popup popup_type_avatar">
+    <div class="popup__container popup__container_type_avatar">
+      <button
+        type="button"
+        aria-label="Закрыть"
+        class="popup__close"
+      ></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form
+        class="popup__form popup__form_avatar"
+        name="avatar-form"
+        novalidate>
+        <input
+          type="url"
+          id="avatar"
+          name="avatar"
+          placeholder="Ссылка на картинку"
+          class="popup__input popup__input_type_avatar"
+          required/>
+        <span id="err-avatar" class="popup__error avatar-error"></span>
+        <button type="submit" class="popup__submit-button">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
   <template class="elements-template" id="item">
     <div class="elements__item">
-    <img src="#" alt="" class="elements__photo">
-    <div class="elements__container">
-      <h2 class="elements__place"></h2>
-      <button type="button" name="like" class="elements__like-button" aria-label="like-button"></button>
-      <button type="button" name="delete" class="elements__delete-button" aria-label="delete-button"></button>
+      <img src="#" alt="" class="elements__photo">
+      <div class="elements__container">
+        <h2 class="elements__place"></h2>
+        <div >
+          <button type="button" name="like" class="elements__like-button" aria-label="like-button"></button>
+          <div class="elements__like-count"></div>
+        </div>
+        
+
+        <button type="button" name="delete" class="elements__delete-button" aria-label="delete-button"></button>
+      </div>
     </div>
-  </div>
   </template>
+
 </body>
 </html>
